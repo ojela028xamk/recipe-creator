@@ -7,13 +7,10 @@ export default function BrowseRecipes(): JSX.Element {
       <h1>Browse Recipes</h1>
       {MockData.map((data: MockDataTS) => (
         <>
-          <p>{data.title}</p>
-
-          <ul>
-            {data.instructions.map((node: string) => (
-              <li>{node}</li>
-            ))}
-          </ul>
+          <div className="m-3 p-2 border w-50">
+            <h3>{data.title}</h3>
+            <p>{data.instructions}</p>
+          </div>
         </>
       ))}
     </div>
