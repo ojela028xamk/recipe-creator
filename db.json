@@ -1,19 +1,9 @@
 {
   "recipes": [
     {
-      "id": "f1d8cfa6-d30d-4ca9-a358-cf6b98c12ac6",
-      "title": "Chicken Wok",
-      "instructions": "Make the chicken wok."
-    },
-    {
-      "id": "f09cba1a-6555-421e-a722-7415c1070a07",
-      "title": "Taco soup",
-      "instructions": "Make the taco soup."
-    },
-    {
-      "id": "91b94894-c0c4-445d-bbb9-b1bae72a0fa3",
-      "title": "Hamburger",
-      "instructions": "Make the hamburger."
+      "id": "45656e9d-2023-4273-8de8-990af45dabd2",
+      "title": "Title",
+      "instructions": "Instructions"
     }
   ]
 }

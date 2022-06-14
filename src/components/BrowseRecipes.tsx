@@ -29,6 +29,12 @@ export default function BrowseRecipes(): JSX.Element {
       });
   }, []);
 
+  function handleDelete(id: string) {
+    fetch(`http://localhost:3004/recipes/${id}`, { method: "DELETE" }).then(
+      () => console.log("Success!")
+    );
+  }
+
   return (
     <div className="p-4">
       <h1>Browse Recipes</h1>
@@ -37,10 +43,28 @@ export default function BrowseRecipes(): JSX.Element {
           <>
             <div key={recipe.id} className="m-3 p-3 border w-50">
               <h3>{recipe.title}</h3>
-              <Button onClick={() => handleModal(recipe)}>Avaa</Button>
+              <Button
+                size="sm"
+                className="m-2"
+                onClick={() => handleModal(recipe)}
+              >
+                Open
+              </Button>
+              <Button variant="warning" size="sm">
+                Modify
+              </Button>
+              <Button
+                variant="danger"
+                size="sm"
+                onClick={() => handleDelete(recipe.id)}
+                className="m-2"
+              >
+                Delete
+              </Button>
             </div>
           </>
         ))}
+      {/* show recipe */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>{modalData?.title}</Modal.Title>
@@ -50,7 +74,7 @@ export default function BrowseRecipes(): JSX.Element {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={() => setShowModal(false)}>
-            Sulje
+            Close
           </Button>
         </Modal.Footer>
       </Modal>
