@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { RecipeTS } from "../interfaces/RecipeTS";
 
 export default function BrowseRecipes(): JSX.Element {
+  const navigate = useNavigate();
   const [recipes, setRecipes] = useState<RecipeTS[]>();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalData, setModalData] = useState<RecipeTS>();
@@ -31,39 +33,48 @@ export default function BrowseRecipes(): JSX.Element {
 
   function handleDelete(id: string) {
     fetch(`http://localhost:3004/recipes/${id}`, { method: "DELETE" }).then(
-      () => console.log("Success!")
+      () => {
+        window.location.reload();
+      }
     );
+  }
+
+  if (!recipes) {
+    return <Spinner animation={"border"} className="m-4" />;
   }
 
   return (
     <div className="p-4">
       <h1>Browse Recipes</h1>
-      {recipes &&
-        recipes.map((recipe: RecipeTS) => (
-          <>
-            <div key={recipe.id} className="m-3 p-3 border w-50">
-              <h3>{recipe.title}</h3>
-              <Button
-                size="sm"
-                className="m-2"
-                onClick={() => handleModal(recipe)}
-              >
-                Open
-              </Button>
-              <Button variant="warning" size="sm">
-                Modify
-              </Button>
-              <Button
-                variant="danger"
-                size="sm"
-                onClick={() => handleDelete(recipe.id)}
-                className="m-2"
-              >
-                Delete
-              </Button>
-            </div>
-          </>
-        ))}
+      {recipes.map((recipe: RecipeTS) => (
+        <>
+          <div key={recipe.id} className="m-3 p-3 border w-50">
+            <h3>{recipe.title}</h3>
+            <Button
+              size="sm"
+              className="m-2"
+              onClick={() => handleModal(recipe)}
+            >
+              Open
+            </Button>
+            <Button
+              variant="warning"
+              size="sm"
+              onClick={() => navigate(`./${recipe.id}`)}
+            >
+              Modify
+            </Button>
+            <Button
+              variant="danger"
+              size="sm"
+              className="m-2"
+              onClick={() => handleDelete(recipe.id)}
+            >
+              Delete
+            </Button>
+          </div>
+        </>
+      ))}
       {/* show recipe */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>

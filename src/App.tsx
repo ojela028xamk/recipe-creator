@@ -3,6 +3,7 @@ import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 import BrowseRecipes from "./components/BrowseRecipes";
 import CreateRecipe from "./components/CreateRecipe";
+import ModifyRecipe from "./components/ModifyRecipe";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path="create" element={<CreateRecipe />} />
           <Route path="browse" element={<BrowseRecipes />} />
+          <Route path="browse/:recipeID" element={<ModifyRecipe />} />
         </Routes>
       </div>
     </div>
