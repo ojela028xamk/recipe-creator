@@ -31,14 +31,6 @@ export default function BrowseRecipes(): JSX.Element {
       });
   }, []);
 
-  function handleDelete(id: string) {
-    fetch(`http://localhost:3004/recipes/${id}`, { method: "DELETE" }).then(
-      () => {
-        window.location.reload();
-      }
-    );
-  }
-
   if (!recipes) {
     return <Spinner animation={"border"} className="m-4" />;
   }
@@ -60,7 +52,7 @@ export default function BrowseRecipes(): JSX.Element {
             <Button
               variant="warning"
               size="sm"
-              onClick={() => navigate(`./${recipe.id}`)}
+              onClick={() => navigate(`../modify/${recipe.id}`)}
             >
               Modify
             </Button>
@@ -68,7 +60,7 @@ export default function BrowseRecipes(): JSX.Element {
               variant="danger"
               size="sm"
               className="m-2"
-              onClick={() => handleDelete(recipe.id)}
+              onClick={() => navigate(`../delete/${recipe.id}`)}
             >
               Delete
             </Button>
