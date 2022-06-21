@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, Modal, Spinner } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { RecipeTS } from "../interfaces/RecipeTS";
 
 export default function BrowseRecipes(): JSX.Element {
+  const navigate = useNavigate();
   const [recipes, setRecipes] = useState<RecipeTS[]>();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalData, setModalData] = useState<RecipeTS>();
@@ -29,18 +31,43 @@ export default function BrowseRecipes(): JSX.Element {
       });
   }, []);
 
+  if (!recipes) {
+    return <Spinner animation={"border"} className="m-4" />;
+  }
+
   return (
     <div className="p-4">
       <h1>Browse Recipes</h1>
-      {recipes &&
-        recipes.map((recipe: RecipeTS) => (
-          <>
-            <div key={recipe.id} className="m-3 p-3 border w-50">
-              <h3>{recipe.title}</h3>
-              <Button onClick={() => handleModal(recipe)}>Avaa</Button>
-            </div>
-          </>
-        ))}
+      {recipes.map((recipe: RecipeTS) => (
+        <>
+          <div key={recipe.id} className="m-3 p-3 border w-50">
+            <h3>{recipe.title}</h3>
+            <Button
+              size="sm"
+              className="m-2"
+              onClick={() => handleModal(recipe)}
+            >
+              Open
+            </Button>
+            <Button
+              variant="warning"
+              size="sm"
+              onClick={() => navigate(`../modify/${recipe.id}`)}
+            >
+              Modify
+            </Button>
+            <Button
+              variant="danger"
+              size="sm"
+              className="m-2"
+              onClick={() => navigate(`../delete/${recipe.id}`)}
+            >
+              Delete
+            </Button>
+          </div>
+        </>
+      ))}
+      {/* show recipe */}
       <Modal show={showModal} onHide={() => setShowModal(false)}>
         <Modal.Header closeButton>
           <Modal.Title>{modalData?.title}</Modal.Title>
@@ -50,7 +77,7 @@ export default function BrowseRecipes(): JSX.Element {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={() => setShowModal(false)}>
-            Sulje
+            Close
           </Button>
         </Modal.Footer>
       </Modal>
