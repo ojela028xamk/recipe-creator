@@ -7,7 +7,9 @@ export default function CreateRecipe(): JSX.Element {
   const [newRecipe, setNewRecipe] = useState<RecipeTS>({
     id: uuidv4(),
     title: "",
-    instructions: "",
+    servingSize: 2,
+    ingredients: ["Ing 1", "Ing 2"],
+    instructions: ["1. Step one", "2. Step two"],
   });
 
   // one function handles all input changes

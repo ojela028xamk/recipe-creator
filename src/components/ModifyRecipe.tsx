@@ -58,7 +58,7 @@ export default function ModifyRecipe(): JSX.Element {
         className="mb-2"
         onClick={() => navigate("../browse")}
       >
-        Peruuta
+        Cancel
       </Button>
       <Form className="w-50">
         <Form.Group controlId="modifyRecipe">
