@@ -8,8 +8,8 @@ export default function CreateRecipe(): JSX.Element {
     id: uuidv4(),
     title: "",
     servingSize: 2,
-    ingredients: ["Ing 1", "Ing 2"],
-    instructions: ["1. Step one", "2. Step two"],
+    ingredients: [],
+    instructions: [],
   });
 
   // one function handles all input changes
