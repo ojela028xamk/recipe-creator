@@ -1,5 +1,7 @@
 export interface RecipeTS {
   id: string;
   title: string;
-  instructions: string;
+  servingSize: string;
+  ingredients: { amount: string; ingredient: string }[];
+  instructions: string[];
 }

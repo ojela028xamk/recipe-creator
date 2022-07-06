@@ -5,6 +5,7 @@ import BrowseRecipes from "./components/BrowseRecipes";
 import CreateRecipe from "./components/CreateRecipe";
 import DeleteRecipe from "./components/DeleteRecipe";
 import ModifyRecipe from "./components/ModifyRecipe";
+import ShowRecipe from "./components/ShowRecipe";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Routes>
           <Route path="create" element={<CreateRecipe />} />
           <Route path="browse" element={<BrowseRecipes />} />
+          <Route path="browse/:recipeID" element={<ShowRecipe />} />
           <Route path="modify/:recipeID" element={<ModifyRecipe />} />
           <Route path="delete/:recipeID" element={<DeleteRecipe />} />
         </Routes>

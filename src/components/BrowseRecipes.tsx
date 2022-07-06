@@ -1,18 +1,11 @@
 import { useEffect, useState } from "react";
-import { Button, Modal, Spinner } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { RecipeTS } from "../interfaces/RecipeTS";
 
 export default function BrowseRecipes(): JSX.Element {
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState<RecipeTS[]>();
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [modalData, setModalData] = useState<RecipeTS>();
-
-  function handleModal(data: RecipeTS) {
-    setShowModal(true);
-    setModalData(data);
-  }
 
   // fetch recipes from json-server
   useEffect(() => {
@@ -45,7 +38,7 @@ export default function BrowseRecipes(): JSX.Element {
             <Button
               size="sm"
               className="m-2"
-              onClick={() => handleModal(recipe)}
+              onClick={() => navigate(`../browse/${recipe.id}`)}
             >
               Open
             </Button>
@@ -67,20 +60,6 @@ export default function BrowseRecipes(): JSX.Element {
           </div>
         </>
       ))}
-      {/* show recipe */}
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>{modalData?.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <p>{modalData?.instructions}</p>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={() => setShowModal(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 }
