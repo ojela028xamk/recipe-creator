@@ -44,16 +44,20 @@ export default function ShowRecipe() {
       <Image src={placeholder} width="200px" />
       <h5>Ingredients</h5>
       <ul>
-        {recipe.ingredients.map((ingredient: string) => (
-          <li>{ingredient}</li>
-        ))}
+        {recipe.ingredients.map(
+          (ingredient: { amount: string; ingredient: string }) => (
+            <li>
+              {ingredient.amount} {ingredient.ingredient}
+            </li>
+          )
+        )}
       </ul>
       <h5>Instructions</h5>
-      <ul>
+      <ol type="1">
         {recipe.instructions.map((instruction: string) => (
           <li>{instruction}</li>
         ))}
-      </ul>
+      </ol>
     </div>
   );
 }
