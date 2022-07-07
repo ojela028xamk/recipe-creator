@@ -1,0 +1,30 @@
+.home-image {
+    background-image: url("../bg-image.png");
+    height: 300px;
+    color: white;
+    padding-top: 2.5em;
+    padding-left: 4em;
+
+    .home-image-header {
+        width: 50%;
+        font-size: 4em;
+        line-height: 1em;
+        color: #fe5000;
+    }
+
+    .home-image-pr {
+        font-size: 1.5em;
+        width: 50%;
+    }
+}
+
+.home-links {
+    padding: 1em;
+    
+    .home-links-card {
+        width: 20em;
+        border: 4px solid #f6f6f6;
+        border-radius: 1em;
+        text-align: center;
+    }
+}
