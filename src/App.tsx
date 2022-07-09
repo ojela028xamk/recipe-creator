@@ -35,6 +35,9 @@ function App() {
           <Route path="delete/:recipeID" element={<DeleteRecipe />} />
         </Routes>
       </div>
+      <footer className="Footer">
+        Copyright <span>&copy;</span> Jere Länsipii | All rights reserved
+      </footer>
     </div>
   );
 }

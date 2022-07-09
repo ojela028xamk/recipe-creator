@@ -1,9 +1,12 @@
 import "./Home.scss";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-  const placeholderimg = require("../recipe-placeholder.png");
+  const navigate = useNavigate();
+  const recipeAdd = require("../recipe-add-01.png");
+  const recipeBrowse = require("../recipe-browse-01.png");
   return (
     <>
       <div className="home-image">
@@ -20,27 +23,31 @@ export default function Home() {
           <Row>
             <Col>
               <Card className="home-links-card">
-                <Card.Img variant="top" src={placeholderimg} />
+                <Card.Img variant="top" src={recipeAdd} />
                 <Card.Body>
-                  <Card.Title>Create Recipe</Card.Title>
+                  <Card.Title>Create a recipe</Card.Title>
                   <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Add a recipe to your database with title, serving size,
+                    instructions and ingredients.
                   </Card.Text>
-                  <Button variant="primary">Go somewhere</Button>
+                  <Button variant="dark" onClick={() => navigate("/create")}>
+                    Create
+                  </Button>
                 </Card.Body>
               </Card>
             </Col>
             <Col>
               <Card className="home-links-card">
-                <Card.Img variant="top" src={placeholderimg} />
+                <Card.Img variant="top" src={recipeBrowse} />
                 <Card.Body>
-                  <Card.Title>Browse Recipes</Card.Title>
+                  <Card.Title>Browse recipes</Card.Title>
                   <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                    Browse all of your recipes in your database. You can also
+                    modify and delete recipes.
                   </Card.Text>
-                  <Button variant="primary">Go somewhere</Button>
+                  <Button variant="dark" onClick={() => navigate("/browse")}>
+                    Browse
+                  </Button>
                 </Card.Body>
               </Card>
             </Col>
