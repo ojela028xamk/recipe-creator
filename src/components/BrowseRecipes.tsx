@@ -7,21 +7,17 @@ export default function BrowseRecipes(): JSX.Element {
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState<RecipeTS[]>();
 
-  // fetch recipes from json-server
+  // fetch recipes from localStorage
   useEffect(() => {
-    fetch("http://localhost:3004/recipes")
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw response;
-      })
-      .then((data) => {
-        setRecipes(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    let values = [],
+      keys = Object.keys(localStorage),
+      i = keys.length;
+
+    while (i--) {
+      values.push(JSON.parse(localStorage.getItem(keys[i]) || "null"));
+    }
+
+    setRecipes(values);
   }, []);
 
   if (!recipes) {

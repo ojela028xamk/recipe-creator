@@ -9,21 +9,10 @@ export default function ShowRecipe() {
   const navigate = useNavigate();
   const [recipe, setRecipe] = useState<RecipeTS>();
 
-  // fetch recipe by id from json-server
+  // fetch recipe by id from localStorage
   useEffect(() => {
-    fetch(`http://localhost:3004/recipes/${recipeID}`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw response;
-      })
-      .then((data) => {
-        setRecipe(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const getRecipe = JSON.parse(localStorage.getItem(`${recipeID}`) || "null");
+    setRecipe(getRecipe);
   }, [recipeID]);
 
   if (!recipe) {

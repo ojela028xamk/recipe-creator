@@ -6,11 +6,8 @@ export default function DeleteRecipe() {
   const navigate = useNavigate();
 
   function handleDelete() {
-    fetch(`http://localhost:3004/recipes/${recipeID}`, {
-      method: "DELETE",
-    }).then(() => {
-      navigate("../browse");
-    });
+    localStorage.removeItem(`${recipeID}`);
+    navigate("../browse");
   }
   return (
     <div className="p-4">

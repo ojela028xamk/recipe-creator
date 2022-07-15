@@ -26,11 +26,7 @@ export default function CreateRecipe(): JSX.Element {
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
-          fetch("http://localhost:3004/recipes", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(values),
-          });
+          localStorage.setItem(values.id, JSON.stringify(values));
           navigate("../browse");
         }}
       >
