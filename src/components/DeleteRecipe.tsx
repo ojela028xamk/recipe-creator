@@ -1,16 +1,21 @@
 import { Button } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import Axios from "axios";
 
 export default function DeleteRecipe() {
   const { recipeID } = useParams();
   const navigate = useNavigate();
 
   function handleDelete() {
-    fetch(`http://localhost:3004/recipes/${recipeID}`, {
+    Axios.delete(`http://localhost:3100/delete/${recipeID}`).then(() => {
+      navigate("../browse");
+    });
+
+    /*fetch(`http://localhost:3004/recipes/${recipeID}`, {
       method: "DELETE",
     }).then(() => {
       navigate("../browse");
-    });
+    });*/
   }
   return (
     <div className="p-4">

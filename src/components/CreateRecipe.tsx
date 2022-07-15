@@ -3,6 +3,7 @@ import { Field, Formik, Form, FieldArray } from "formik";
 import { RecipeTS } from "../interfaces/RecipeTS";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import Axios from "axios";
 
 export default function CreateRecipe(): JSX.Element {
   const navigate = useNavigate();
@@ -26,12 +27,21 @@ export default function CreateRecipe(): JSX.Element {
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
-          fetch("http://localhost:3004/recipes", {
+          Axios.post("http://localhost:3100/create", {
+            title: values.title,
+            servingSize: values.servingSize,
+            ingredients: values.ingredients,
+            instructions: values.instructions,
+          }).then(() => {
+            navigate("../browse");
+          });
+
+          /*fetch("http://localhost:3004/recipes", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(values),
           });
-          navigate("../browse");
+          navigate("../browse");*/
         }}
       >
         {({ values }) => (

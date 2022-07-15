@@ -3,15 +3,21 @@ import { useEffect, useState } from "react";
 import { Button, Form, Spinner } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { RecipeTS } from "../interfaces/RecipeTS";
+import Axios from "axios";
 
 export default function ModifyRecipe(): JSX.Element {
   const { recipeID } = useParams();
   const navigate = useNavigate();
   const [recipe, setRecipe] = useState<RecipeTS>();
 
-  // fetch recipes from json-server
+  // fetch recipe from SQL-server
   useEffect(() => {
-    fetch(`http://localhost:3004/recipes/${recipeID}`)
+    Axios.get(`http://localhost:3100/browse/${recipeID}`).then((response) => {
+      console.log(response.data);
+      setRecipe(response.data);
+    });
+
+    /*fetch(`http://localhost:3004/recipes/${recipeID}`)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -23,7 +29,7 @@ export default function ModifyRecipe(): JSX.Element {
       })
       .catch((error) => {
         console.log(error);
-      });
+      });*/
   }, [recipeID]);
 
   if (!recipe) {

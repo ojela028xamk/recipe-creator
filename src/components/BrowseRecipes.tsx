@@ -2,14 +2,19 @@ import { useEffect, useState } from "react";
 import { Button, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { RecipeTS } from "../interfaces/RecipeTS";
+import Axios from "axios";
 
 export default function BrowseRecipes(): JSX.Element {
   const navigate = useNavigate();
   const [recipes, setRecipes] = useState<RecipeTS[]>();
 
-  // fetch recipes from json-server
+  // fetch recipes from SQL-server
   useEffect(() => {
-    fetch("http://localhost:3004/recipes")
+    Axios.get("http://localhost:3100/browse").then((response) => {
+      setRecipes(response.data);
+    });
+
+    /*fetch("http://localhost:3004/recipes")
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -21,7 +26,7 @@ export default function BrowseRecipes(): JSX.Element {
       })
       .catch((error) => {
         console.log(error);
-      });
+      });*/
   }, []);
 
   if (!recipes) {
