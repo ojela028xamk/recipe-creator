@@ -13,12 +13,9 @@ export default function Home() {
         <header className="home-image-header">
           Store Your Recipes <GiForkKnifeSpoon />
         </header>
-        <p className="home-image-pr">
-          In this site you can store your own recipes. You can also modify and
-          delete recipes.
+        <p className="home-image-p">
+          In this site you can store your own recipes.
         </p>
-      </div>
-      <div className="home-links">
         <Container>
           <Row>
             <Col>
@@ -30,7 +27,11 @@ export default function Home() {
                     Add a recipe to your database with title, serving size,
                     instructions and ingredients.
                   </Card.Text>
-                  <Button variant="dark" onClick={() => navigate("/create")}>
+                  <Button
+                    size="lg"
+                    variant="outline-light"
+                    onClick={() => navigate("/create")}
+                  >
                     Create
                   </Button>
                 </Card.Body>
@@ -45,7 +46,11 @@ export default function Home() {
                     Browse all of your recipes in your database. You can also
                     modify and delete recipes.
                   </Card.Text>
-                  <Button variant="dark" onClick={() => navigate("/browse")}>
+                  <Button
+                    size="lg"
+                    variant="outline-light"
+                    onClick={() => navigate("/browse")}
+                  >
                     Browse
                   </Button>
                 </Card.Body>

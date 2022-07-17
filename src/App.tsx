@@ -1,6 +1,7 @@
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
+import { BiFoodMenu } from "react-icons/bi";
 import { Link, Route, Routes } from "react-router-dom";
-import "./App.css";
+import "./App.scss";
 import BrowseRecipes from "./components/BrowseRecipes";
 import CreateRecipe from "./components/CreateRecipe";
 import DeleteRecipe from "./components/DeleteRecipe";
@@ -12,19 +13,11 @@ function App() {
   document.body.style.background = "#f6f6f6";
   return (
     <div className="App">
-      <Navbar>
-        <Container>
-          <Navbar.Brand href="/">Recipe Creator</Navbar.Brand>
-          <Nav className="me-auto">
-            <Link to="/create" className="m-2 text-dark text-decoration-none">
-              Create Recipe
-            </Link>
-            <Link to="/browse" className="m-2 text-dark text-decoration-none">
-              Browse Recipes
-            </Link>
-          </Nav>
-        </Container>
-      </Navbar>
+      <Nav className="navbar">
+        <Link to="/" className="text-light text-decoration-none display-6">
+          Recipe Creator <BiFoodMenu className="navbar-brand" />
+        </Link>
+      </Nav>
       <div className="Content">
         <Routes>
           <Route index element={<Home />} />
