@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { Button, Spinner } from "react-bootstrap";
+import { Button, Col, Container, Image, Row, Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { RecipeTS } from "../interfaces/RecipeTS";
+import "./BrowseRecipes.scss";
+import recipeImg from "../tacos.svg";
 
 export default function BrowseRecipes(): JSX.Element {
   const navigate = useNavigate();
@@ -25,37 +27,53 @@ export default function BrowseRecipes(): JSX.Element {
   }
 
   return (
-    <div className="p-4">
+    <div className="browse-recipes">
+      <Button variant="dark" onClick={() => navigate("../create")}>
+        Create a recipe &gt;&gt;
+      </Button>
       <h1>Browse Recipes</h1>
-      {recipes.map((recipe: RecipeTS) => (
-        <>
-          <div key={recipe.id} className="m-3 p-3 border w-50">
-            <h3>{recipe.title}</h3>
-            <Button
-              size="sm"
-              className="m-2"
-              onClick={() => navigate(`../browse/${recipe.id}`)}
-            >
-              Open
-            </Button>
-            <Button
-              variant="warning"
-              size="sm"
-              onClick={() => navigate(`../modify/${recipe.id}`)}
-            >
-              Modify
-            </Button>
-            <Button
-              variant="danger"
-              size="sm"
-              className="m-2"
-              onClick={() => navigate(`../delete/${recipe.id}`)}
-            >
-              Delete
-            </Button>
-          </div>
-        </>
-      ))}
+      <Container>
+        <Row className="w-80 justify-content-center">
+          {recipes.map((recipe: RecipeTS) => (
+            <>
+              <Col xs={5} className="browse-recipes-card">
+                <div key={recipe.id} className="d-flex flex-row">
+                  <Image
+                    src={recipeImg}
+                    className="browse-recipes-card-image"
+                  />
+                  <div className="browse-recipes-card-text">
+                    <h3>{recipe.title}</h3>
+                    <span>Servings: {recipe.servingSize}</span>
+                    <Button
+                      variant="outline-dark"
+                      size="sm"
+                      onClick={() => navigate(`../browse/${recipe.id}`)}
+                    >
+                      Open
+                    </Button>
+                    <Button
+                      variant="outline-dark"
+                      size="sm"
+                      className="m-2"
+                      onClick={() => navigate(`../modify/${recipe.id}`)}
+                    >
+                      Modify
+                    </Button>
+                    <Button
+                      variant="outline-danger"
+                      size="sm"
+                      onClick={() => navigate(`../delete/${recipe.id}`)}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </div>
+              </Col>
+            </>
+          ))}
+        </Row>
+      </Container>
     </div>
   );
 }
