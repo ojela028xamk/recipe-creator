@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Button, Image, Spinner } from "react-bootstrap";
+import { Button, Col, Container, Row, Spinner } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { RecipeTS } from "../interfaces/RecipeTS";
-import placeholder from "../recipeimg.png";
+import "./ShowRecipe.scss";
 
 export default function ShowRecipe() {
   const { recipeID } = useParams();
@@ -20,33 +20,40 @@ export default function ShowRecipe() {
   }
 
   return (
-    <div className="p-4">
+    <div className="show-recipe">
       <Button
-        variant="primary"
+        variant="dark"
         className="mb-2"
         onClick={() => navigate("../browse")}
       >
         Return
       </Button>
-      <h1>{recipe.title}</h1>
-      <h5>Servings: {recipe.servingSize}</h5>
-      <Image src={placeholder} width="200px" />
-      <h5>Ingredients</h5>
-      <ul>
-        {recipe.ingredients.map(
-          (ingredient: { amount: string; ingredient: string }) => (
-            <li>
-              {ingredient.amount} {ingredient.ingredient}
-            </li>
-          )
-        )}
-      </ul>
-      <h5>Instructions</h5>
-      <ol type="1">
-        {recipe.instructions.map((instruction: string) => (
-          <li>{instruction}</li>
-        ))}
-      </ol>
+      <Container className="mt-3">
+        <h1>{recipe.title}</h1>
+        <h4>Servings: {recipe.servingSize}</h4>
+        <Row>
+          <Col xs={7} className="show-recipe-info">
+            <h4>Instructions</h4>
+            <ol type="1">
+              {recipe.instructions.map((instruction: string) => (
+                <li>{instruction}</li>
+              ))}
+            </ol>
+          </Col>
+          <Col xs={4} className="show-recipe-info">
+            <h4>Ingredients</h4>
+            <ul>
+              {recipe.ingredients.map(
+                (ingredient: { amount: string; ingredient: string }) => (
+                  <li>
+                    {ingredient.amount} {ingredient.ingredient}
+                  </li>
+                )
+              )}
+            </ul>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }

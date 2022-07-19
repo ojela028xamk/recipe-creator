@@ -1,5 +1,14 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Container, Image, Row, Spinner } from "react-bootstrap";
+import {
+  Alert,
+  Button,
+  Col,
+  Container,
+  Image,
+  Row,
+  Spinner,
+} from "react-bootstrap";
+import { ImFileEmpty } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
 import { RecipeTS } from "../interfaces/RecipeTS";
 import "./BrowseRecipes.scss";
@@ -32,6 +41,14 @@ export default function BrowseRecipes(): JSX.Element {
         Create a recipe &gt;&gt;
       </Button>
       <h1>Browse Recipes</h1>
+      {recipes.length === 0 && (
+        <Alert variant="danger" className="browse-recipes-alert">
+          <span>
+            There are no recipes here
+            <ImFileEmpty className="empty-icon" />
+          </span>
+        </Alert>
+      )}
       <Container>
         <Row className="w-80 justify-content-center">
           {recipes.map((recipe: RecipeTS) => (

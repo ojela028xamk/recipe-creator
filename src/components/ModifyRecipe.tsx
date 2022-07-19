@@ -1,8 +1,10 @@
 import { Field, FieldArray, Formik } from "formik";
 import { useEffect, useState } from "react";
 import { Button, Form, Spinner } from "react-bootstrap";
+import { TiDelete } from "react-icons/ti";
 import { useNavigate, useParams } from "react-router-dom";
 import { RecipeTS } from "../interfaces/RecipeTS";
+import "./CreateRecipeForm.scss";
 
 export default function ModifyRecipe(): JSX.Element {
   const { recipeID } = useParams();
@@ -20,13 +22,9 @@ export default function ModifyRecipe(): JSX.Element {
   }
 
   return (
-    <div className="p-4">
-      <Button
-        variant="primary"
-        className="mb-2"
-        onClick={() => navigate("../browse")}
-      >
-        Return
+    <div className="create-form">
+      <Button variant="dark" onClick={() => navigate("../browse")}>
+        Cancel
       </Button>
       <Formik
         initialValues={recipe}
@@ -38,7 +36,7 @@ export default function ModifyRecipe(): JSX.Element {
         {({ submitForm, values }) => (
           <Form>
             <div className="m-2">
-              <h2>Modifying: {recipe.title}</h2>
+              <h1>Modifying: {recipe.title}</h1>
               <label htmlFor="title" className="d-block">
                 Title
               </label>
@@ -48,18 +46,15 @@ export default function ModifyRecipe(): JSX.Element {
               </label>
               <Field id="servingSize" name="servingSize" />
             </div>
-            <div className="m-2">
-              <h5>Ingredients</h5>
+            <div>
+              <h2>Ingredients</h2>
               <FieldArray name="ingredients">
                 {({ insert, remove, push }) => (
                   <div>
                     {values.ingredients.length > 0 &&
                       values.ingredients.map((ingredient, index) => (
-                        <div key={index}>
-                          <label
-                            htmlFor={`ingredients.${index}.amount`}
-                            className="p-1"
-                          >
+                        <div key={index} className="create-ingredients">
+                          <label htmlFor={`ingredients.${index}.amount`}>
                             Amount
                           </label>
                           <Field
@@ -67,10 +62,7 @@ export default function ModifyRecipe(): JSX.Element {
                             placeholder="ex. 1 tsp"
                             type="text"
                           />
-                          <label
-                            htmlFor={`ingredients.${index}.ingredient`}
-                            className="p-1"
-                          >
+                          <label htmlFor={`ingredients.${index}.ingredient`}>
                             Ingredient
                           </label>
                           <Field
@@ -78,17 +70,16 @@ export default function ModifyRecipe(): JSX.Element {
                             placeholder="ex. Salt"
                             type="text"
                           />
-                          <button
-                            type="button"
-                            className="secondary"
+                          <span
+                            className="create-form-button"
                             onClick={() => remove(index)}
                           >
-                            X
-                          </button>
+                            <TiDelete />
+                          </span>
                         </div>
                       ))}
                     <Button
-                      variant="info"
+                      variant="outline-dark"
                       className="m-2"
                       onClick={() => push({ amount: "", ingredient: "" })}
                     >
@@ -98,14 +89,14 @@ export default function ModifyRecipe(): JSX.Element {
                 )}
               </FieldArray>
             </div>
-            <div className="m-2">
-              <h5>Instructions</h5>
+            <div>
+              <h2>Instructions</h2>
               <FieldArray name="instructions">
                 {({ insert, remove, push }) => (
                   <div>
                     {values.instructions.length > 0 &&
                       values.instructions.map((instruction, index) => (
-                        <div key={index}>
+                        <div key={index} className="create-instructions">
                           <label
                             htmlFor={`instructions.${index}.instrunction`}
                             className="p-1"
@@ -120,13 +111,16 @@ export default function ModifyRecipe(): JSX.Element {
                             placeholder="Add water to a pot..."
                             type="text"
                           />
-                          <button type="button" onClick={() => remove(index)}>
-                            X
-                          </button>
+                          <span
+                            className="create-form-button"
+                            onClick={() => remove(index)}
+                          >
+                            <TiDelete />
+                          </span>
                         </div>
                       ))}
                     <Button
-                      variant="info"
+                      variant="outline-dark"
                       className="m-2"
                       onClick={() => push("")}
                     >
@@ -138,7 +132,7 @@ export default function ModifyRecipe(): JSX.Element {
             </div>
             <Button
               type="submit"
-              variant="outline-info"
+              variant="dark"
               size="lg"
               className="m-2"
               onClick={submitForm}
