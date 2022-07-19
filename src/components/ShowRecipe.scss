@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+.show-recipe {
+    padding: 1em;
+    margin: auto;
+    width: 80%;
+    text-align: center;
+
+    h1, h4 {
+        font-family: 'Montserrat', sans-serif;
+        margin: 0;
+    }
+
+    h4 {
+        padding: 0.2em;
+    }
+
+    h1 {
+        margin: 0;
+    }
+
+    .show-recipe-info {
+        text-align: left;
+        font-size: 1.2em;
+        background-color: #f6f6f6;
+        margin: 0.5em;
+        margin-top: 1.2em;
+        padding: 0.5em;
+    }
+
+}

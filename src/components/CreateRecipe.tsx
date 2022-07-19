@@ -37,7 +37,7 @@ export default function CreateRecipe(): JSX.Element {
       >
         {({ values }) => (
           <Form>
-            <div className="m-2">
+            <div>
               <label htmlFor="title" className="d-block">
                 Title
               </label>
@@ -47,7 +47,7 @@ export default function CreateRecipe(): JSX.Element {
               </label>
               <Field id="servingSize" name="servingSize" />
             </div>
-            <div className="m-2">
+            <div>
               <h2>Ingredients</h2>
               <FieldArray name="ingredients">
                 {({ insert, remove, push }) => (
@@ -90,7 +90,7 @@ export default function CreateRecipe(): JSX.Element {
                 )}
               </FieldArray>
             </div>
-            <div className="m-2">
+            <div>
               <h2>Instructions</h2>
               <FieldArray name="instructions">
                 {({ insert, remove, push }) => (
