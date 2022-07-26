@@ -1,5 +1,6 @@
 {
   "name": "recipe-creator",
+  "homepage": "https://ojela028xamk.github.io/recipe-creator/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -25,6 +26,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -51,6 +54,7 @@
   "devDependencies": {
     "@types/uuid": "^8.3.4",
     "css-loader": "^6.7.1",
+    "gh-pages": "^4.0.0",
     "style-loader": "^3.3.1"
   }
 }
