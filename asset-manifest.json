@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/recipe-creator/static/css/main.2e8f2260.css",
+    "main.js": "/recipe-creator/static/js/main.3a048c56.js",
+    "static/js/787.bae716f1.chunk.js": "/recipe-creator/static/js/787.bae716f1.chunk.js",
+    "static/media/bg-image-new.png": "/recipe-creator/static/media/bg-image-new.57c9d855d7b030bbb6c0.png",
+    "static/media/tacos.svg": "/recipe-creator/static/media/tacos.1d82d4b430944da8928b6b6383631eba.svg",
+    "index.html": "/recipe-creator/index.html",
+    "main.2e8f2260.css.map": "/recipe-creator/static/css/main.2e8f2260.css.map",
+    "main.3a048c56.js.map": "/recipe-creator/static/js/main.3a048c56.js.map",
+    "787.bae716f1.chunk.js.map": "/recipe-creator/static/js/787.bae716f1.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2e8f2260.css",
+    "static/js/main.3a048c56.js"
+  ]
+}
