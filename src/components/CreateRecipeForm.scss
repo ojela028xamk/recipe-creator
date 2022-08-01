@@ -33,6 +33,11 @@
         margin-bottom: 0.5em;
     }
 
+    .create-form-required{
+        color: red;
+        font-size: 1.2em;
+    }
+
     .create-ingredients, .create-instructions {
         display: flex; 
         flex-direction: row; 

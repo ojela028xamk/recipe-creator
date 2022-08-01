@@ -31,7 +31,6 @@ export default function CreateRecipe(): JSX.Element {
       .integer()
       .min(1, "Give number between 1-10")
       .max(10, "Give number between 1-10"),
-    instructions: Yup.array().min(2, "Add at least one ingredient."),
   });
 
   return (
@@ -55,13 +54,15 @@ export default function CreateRecipe(): JSX.Element {
                 Title
               </label>
               <Field id="title" name="title" />
-              {errors.title && touched.title ? <div>{errors.title}</div> : null}
+              {errors.title && touched.title ? (
+                <div className="create-form-required">{errors.title}</div>
+              ) : null}
               <label htmlFor="servingSize" className="d-block">
                 Serving size
               </label>
               <Field id="servingSize" name="servingSize" />
               {errors.servingSize && touched.servingSize ? (
-                <div>{errors.servingSize}</div>
+                <div className="create-form-required">{errors.servingSize}</div>
               ) : null}
             </div>
             <div>
