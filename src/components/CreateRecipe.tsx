@@ -4,6 +4,7 @@ import { TiDelete } from "react-icons/ti";
 import { RecipeTS } from "../interfaces/RecipeTS";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import * as Yup from "yup";
 import "./CreateRecipeForm.scss";
 
 export default function CreateRecipe(): JSX.Element {
@@ -22,6 +23,16 @@ export default function CreateRecipe(): JSX.Element {
     instructions: [""],
   };
 
+  const RecipeSchema = Yup.object().shape({
+    title: Yup.string().required("Required"),
+    servingSize: Yup.number()
+      .required("Required")
+      .positive()
+      .integer()
+      .min(1, "Give number between 1-10")
+      .max(10, "Give number between 1-10"),
+  });
+
   return (
     <div className="create-form">
       <Button variant="dark" onClick={() => navigate("../browse")}>
@@ -30,22 +41,29 @@ export default function CreateRecipe(): JSX.Element {
       <h1>Create a recipe</h1>
       <Formik
         initialValues={initialValues}
+        validationSchema={RecipeSchema}
         onSubmit={(values) => {
           localStorage.setItem(values.id, JSON.stringify(values));
           navigate("../browse");
         }}
       >
-        {({ values }) => (
+        {({ values, errors, touched }) => (
           <Form>
             <div>
               <label htmlFor="title" className="d-block">
                 Title
               </label>
               <Field id="title" name="title" />
+              {errors.title && touched.title ? (
+                <div className="create-form-required">{errors.title}</div>
+              ) : null}
               <label htmlFor="servingSize" className="d-block">
                 Serving size
               </label>
               <Field id="servingSize" name="servingSize" />
+              {errors.servingSize && touched.servingSize ? (
+                <div className="create-form-required">{errors.servingSize}</div>
+              ) : null}
             </div>
             <div>
               <h2>Ingredients</h2>
@@ -92,6 +110,9 @@ export default function CreateRecipe(): JSX.Element {
             </div>
             <div>
               <h2>Instructions</h2>
+              {errors.instructions && touched.instructions ? (
+                <div>{errors.instructions}</div>
+              ) : null}
               <FieldArray name="instructions">
                 {({ insert, remove, push }) => (
                   <div>
