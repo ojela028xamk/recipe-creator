@@ -29,8 +29,8 @@ export default function CreateRecipe(): JSX.Element {
       .required("Required")
       .positive()
       .integer()
-      .min(1, "Give number between 1-10")
-      .max(10, "Give number between 1-10"),
+      .min(1, "Give a number between 1-10")
+      .max(10, "Give a number between 1-10"),
   });
 
   return (
