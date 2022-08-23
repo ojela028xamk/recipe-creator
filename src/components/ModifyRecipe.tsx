@@ -4,6 +4,7 @@ import { Button, Form, Spinner } from "react-bootstrap";
 import { TiDelete } from "react-icons/ti";
 import { useNavigate, useParams } from "react-router-dom";
 import { RecipeTS } from "../interfaces/RecipeTS";
+import * as Yup from "yup";
 import "./CreateRecipeForm.scss";
 
 export default function ModifyRecipe(): JSX.Element {
@@ -21,6 +22,16 @@ export default function ModifyRecipe(): JSX.Element {
     return <Spinner animation={"border"} className="m-4" />;
   }
 
+  const RecipeSchema = Yup.object().shape({
+    title: Yup.string().required("Required"),
+    servingSize: Yup.number()
+      .required("Required")
+      .positive()
+      .integer()
+      .min(1, "Give a number between 1-10")
+      .max(10, "Give a number between 1-10"),
+  });
+
   return (
     <div className="create-form">
       <Button variant="dark" onClick={() => navigate("../browse")}>
@@ -28,12 +39,13 @@ export default function ModifyRecipe(): JSX.Element {
       </Button>
       <Formik
         initialValues={recipe}
+        validationSchema={RecipeSchema}
         onSubmit={(values) => {
           localStorage.setItem(values.id, JSON.stringify(values));
           navigate("../browse");
         }}
       >
-        {({ submitForm, values }) => (
+        {({ submitForm, values, errors, touched }) => (
           <Form>
             <div className="m-2">
               <h1>Modifying: {recipe.title}</h1>
@@ -41,10 +53,16 @@ export default function ModifyRecipe(): JSX.Element {
                 Title
               </label>
               <Field id="title" name="title" />
+              {errors.title && touched.title ? (
+                <div className="create-form-required">{errors.title}</div>
+              ) : null}
               <label htmlFor="servingSize" className="d-block">
                 Serving size
               </label>
               <Field id="servingSize" name="servingSize" />
+              {errors.servingSize && touched.servingSize ? (
+                <div className="create-form-required">{errors.servingSize}</div>
+              ) : null}
             </div>
             <div>
               <h2>Ingredients</h2>
@@ -131,11 +149,10 @@ export default function ModifyRecipe(): JSX.Element {
               </FieldArray>
             </div>
             <Button
-              type="submit"
+              onClick={submitForm}
               variant="dark"
               size="lg"
               className="m-2"
-              onClick={submitForm}
             >
               Submit
             </Button>

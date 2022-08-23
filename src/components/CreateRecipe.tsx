@@ -47,7 +47,7 @@ export default function CreateRecipe(): JSX.Element {
           navigate("../browse");
         }}
       >
-        {({ values, errors, touched }) => (
+        {({ submitForm, values, errors, touched }) => (
           <Form>
             <div>
               <label htmlFor="title" className="d-block">
@@ -110,9 +110,6 @@ export default function CreateRecipe(): JSX.Element {
             </div>
             <div>
               <h2>Instructions</h2>
-              {errors.instructions && touched.instructions ? (
-                <div>{errors.instructions}</div>
-              ) : null}
               <FieldArray name="instructions">
                 {({ insert, remove, push }) => (
                   <div>
@@ -148,7 +145,12 @@ export default function CreateRecipe(): JSX.Element {
                 )}
               </FieldArray>
             </div>
-            <Button type="submit" variant="dark" size="lg" className="m-2">
+            <Button
+              onClick={submitForm}
+              variant="dark"
+              size="lg"
+              className="m-2"
+            >
               Add recipe
             </Button>
           </Form>
